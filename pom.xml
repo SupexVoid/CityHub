@@ -11,8 +11,8 @@
     <groupId>com.hmdp</groupId>
     <artifactId>hm-dianping</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>CityHub</name>
-    <description>CityHub local life services backend</description>
+    <name>CitySeek</name>
+    <description>一个本地生活与优惠券秒杀平台</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
