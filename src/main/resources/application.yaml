@@ -1,31 +1,33 @@
-  server:
-    port: 8081
-  spring:
-    application:
-      name: hmdp
-    datasource:
-      driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/dingping?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-      username: root
-      password: 290390
-    redis:
-      host: 127.0.0.1
-      port: 6379
-
-      lettuce:
-        pool:
-          max-active: 30
-          max-idle: 15
-          min-idle: 5
-          time-between-eviction-runs: 10s
-    jackson:
-      default-property-inclusion: non_null # JSON处理时忽略非空字段
-  rocketmq:
-    name-server: 127.0.0.1:9876
-    producer:
-      group: seckill-order-producer
-  mybatis-plus:
-    type-aliases-package: com.hmdp.entity # 别名扫描包
-  logging:
-    level:
-      com.hmdp: debug
+server:
+  address: 127.0.0.1
+  port: ${SERVER_PORT:8081}
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+  application:
+    name: cityseek
+  task:
+    scheduling:
+      pool:
+        size: 3
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:cityseek_local}?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:}
+  redis:
+    host: ${REDIS_HOST:127.0.0.1}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:}
+    lettuce:
+      pool:
+        max-active: 30
+        max-idle: 15
+        min-idle: 2
+  jackson:
+    default-property-inclusion: non_null
+mybatis-plus:
+  type-aliases-package: com.hmdp.entity
+logging:
+  level:
+    com.hmdp: info

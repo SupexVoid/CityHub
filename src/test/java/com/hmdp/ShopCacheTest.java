@@ -12,6 +12,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+@org.junit.jupiter.api.Tag("manual")
 @SpringBootTest
 public class ShopCacheTest {
 

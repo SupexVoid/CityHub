@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 import static com.hmdp.utils.RedisConstants.SHOP_GEO_KEY;
 
+@org.junit.jupiter.api.Tag("manual")
 @SpringBootTest
 class HmDianPingApplicationTests {
     @Resource

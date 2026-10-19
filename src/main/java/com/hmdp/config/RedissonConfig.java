@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@org.springframework.context.annotation.Profile("redisson")
 public class RedissonConfig {
     @Bean
     public RedissonClient redissonClient(){

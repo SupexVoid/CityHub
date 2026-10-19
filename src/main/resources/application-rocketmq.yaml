@@ -1,0 +1,7 @@
+cityseek:
+  local-demo: false
+rocketmq:
+  name-server: ${ROCKETMQ_NAMESERVER:127.0.0.1:9876}
+  producer:
+    group: cityseek-order-producer
+    send-message-timeout: 3000

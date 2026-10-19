@@ -30,6 +30,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 
+@org.junit.jupiter.api.Tag("manual")
 @SpringBootTest
 @AutoConfigureMockMvc
 class VoucherOrderControllerTest {

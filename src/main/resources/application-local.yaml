@@ -1,0 +1,11 @@
+spring:
+  autoconfigure:
+    exclude: org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration
+  redis:
+    database: ${REDIS_DATABASE:12}
+cityseek:
+  order:
+    timeout-seconds: ${ORDER_TIMEOUT_SECONDS:900}
+    scan-delay-ms: ${ORDER_SCAN_DELAY_MS:60000}
+    retry-delay-ms: 3000
+  local-demo: true

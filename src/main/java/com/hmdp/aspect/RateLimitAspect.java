@@ -48,7 +48,8 @@ public class RateLimitAspect {
                 java.util.Collections.singletonList(key),
                 String.valueOf(rateLimiter.windowSeconds()),
                 String.valueOf(rateLimiter.count()),
-                String.valueOf(System.currentTimeMillis())
+                String.valueOf(System.currentTimeMillis()),
+                java.util.UUID.randomUUID().toString()
         );
 
         if (allowed == null || allowed == 0L) {

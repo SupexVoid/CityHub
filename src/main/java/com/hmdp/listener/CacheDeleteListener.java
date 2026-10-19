@@ -14,18 +14,19 @@ import javax.annotation.Resource;
  * 缓存删除补偿消费者：收到消息后重试删除店铺缓存。
  */
 @Component
+@org.springframework.context.annotation.Profile("rocketmq")
 @Slf4j
 @RequiredArgsConstructor
 @RocketMQMessageListener(topic = "cache-delete-topic", consumerGroup = "cache-delete-consumer")
 public class CacheDeleteListener implements RocketMQListener<String> {
 
     @Resource
-    private StringRedisTemplate stringRedisTemplate;
+    private com.hmdp.cache.CacheInvalidationService invalidations;
 
     @Override
     public void onMessage(String shopIdStr) {
         try {
-            stringRedisTemplate.delete(RedisConstants.CACHE_SHOP_KEY + shopIdStr);
+            invalidations.invalidate(Long.valueOf(shopIdStr));
             log.info("缓存删除补偿成功 shopId={}", shopIdStr);
         } catch (Exception e) {
             log.error("缓存删除补偿失败 shopId={}", shopIdStr, e);

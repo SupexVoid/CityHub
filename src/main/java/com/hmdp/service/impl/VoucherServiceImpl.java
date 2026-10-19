@@ -30,6 +30,8 @@ public class VoucherServiceImpl extends ServiceImpl<VoucherMapper, Voucher> impl
     private ISeckillVoucherService seckillVoucherService;
     @Resource
     private StringRedisTemplate stringRedisTemplate;
+    @Resource
+    private com.hmdp.order.RedisReservationStore reservations;
 
     @Override
     public Result queryVoucherOfShop(Long shopId) {
@@ -52,7 +54,12 @@ public class VoucherServiceImpl extends ServiceImpl<VoucherMapper, Voucher> impl
         seckillVoucher.setEndTime(voucher.getEndTime());
         seckillVoucherService.save(seckillVoucher);
         //保存秒杀得库存到redis
-        stringRedisTemplate.opsForValue().set(SECKILL_STOCK_KEY +voucher.getId(),voucher.getStock().toString());
+        org.springframework.transaction.support.TransactionSynchronizationManager.registerSynchronization(
+                new org.springframework.transaction.support.TransactionSynchronization() {
+                    @Override public void afterCommit() {
+                        reservations.initialize(voucher.getId(), voucher.getStock(), voucher.getBeginTime(), voucher.getEndTime());
+                    }
+                });
 
     }
 }

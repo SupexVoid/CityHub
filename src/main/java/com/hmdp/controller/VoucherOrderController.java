@@ -28,9 +28,13 @@ public class VoucherOrderController {
         return voucherOrderService.seckillVoucher(voucherId);
     }
 
-    @PostMapping("pay/callback/{orderId}")
-    public Result payCallback(@PathVariable("orderId") Long orderId) {
-        boolean success = voucherOrderService.payCallback(orderId);
-        return success ? Result.ok() : Result.fail("支付回调处理失败或订单状态已变更");
+
+    @org.springframework.web.bind.annotation.GetMapping("/{orderId}")
+    public Result findOrder(@PathVariable("orderId") Long orderId) {
+        com.hmdp.entity.VoucherOrder order = voucherOrderService.getById(orderId);
+        if (order == null) return Result.fail("订单处理中或不存在，请稍后查询");
+        if (com.hmdp.utils.UserHolder.getUser() == null || !order.getUserId().equals(com.hmdp.utils.UserHolder.getUser().getId()))
+            return Result.fail("无权查看该订单");
+        return Result.ok(order);
     }
 }
