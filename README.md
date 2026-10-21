@@ -183,4 +183,4 @@ CitySeek/
 
 ## 致谢与许可
 
-基于黑马点评业务与 [CityHub 参考实现](https://github.com/Xiaoc7r/CityHub) 扩展，围绕缓存一致性、预占恢复与订单生命周期继续完善。使用 [MIT License](LICENSE)，保留版权声明。
+使用 [MIT License](LICENSE)，保留版权声明。
